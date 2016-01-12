@@ -1,0 +1,52 @@
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+body,
+html {
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  background: #0b2981;
+}
+.es {
+  position: relative;
+  overflow: hidden;
+}
+.web-es {
+  height: 400px;
+  width: 1778px;
+  margin: 0 auto;
+  position: relative;
+  padding-top: 400px;
+}
+.cas {
+  position: relative;
+  z-index: 2;
+  vertical-align: top;
+}
+.es-web-img {
+  position: absolute;
+  z-index: 1;
+  vertical-align: top;
+  top: 400px;
+}
+.es-img {
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  vertical-align: top;
+  top: 0;
+  left: 0;
+  border: none;
+  outline: none;
+}
+.web-bg {
+  background: url("../img/es-web-2.jpg") no-repeat;
+  width: 1959px;
+  height: 1279px;
+}

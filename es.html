@@ -1,174 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
     <title></title>
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui"/>
-    <style>
-        body,html{
-            padding: 0;
-            margin: 0;
-        }
-        .es{
-            position: relative;
-            overflow: hidden;
-        }
-        .cas{
-            position: relative;
-            z-index: 2;
-            
-        }
-        .es-img{
-            position: absolute;
-            z-index: 1;
-            width: 100%;
-            height: 99%;
-            vertical-align: top;
-        }
-    </style>
+    <link rel="stylesheet" href="css/es.css">
 </head>
 <body>
-    <div class="es">
-        <img class="es-img" id="es-img">
+    <div id="es" class="es">
         <canvas class="cas" id="cas"></canvas>
     </div>
 
+    <script src="js/es.js"></script>
     <script>
-        var canvas = document.getElementById("cas"), ctx = canvas.getContext("2d");
-        var x1, y1, a = 20, timeout, totimes = 100, distance = 30;
-        var saveDot = [];
-        canvas.width = document.body.offsetWidth;
-       // canvas.width = "300px";
-        var imgArry=['1.jpg','2.jpg'];
-        function startGame(){
-            document.getElementById('es-img').src='img/'+imgArry.pop();
-            var img = new Image();
-            img.src = "img/a.png";
-            img.onload = function () {
-                img.height=img.height*(canvas.width/img.width);
-                img.width=canvas.width;
-                canvas.height = img.height;
-                var w = canvas.height*img.width/img.height;
-                ctx.drawImage(img, (canvas.width-w)/2, 0, w, canvas.height);
-//                ctx.beginPath();
-//                ctx.fillStyle = "#999";
-//                ctx.fillRect(0,0,canvas.width,canvas.height);
-//                ctx.closePath();
-                tapClip()
-            };
-        }
-        startGame();
-
-        function getClipArea(e, hastouch){
-            var x;
-            var y;
-            if(hastouch){
-                if(e.targetTouches[0]){
-                    x=e.targetTouches[0].pageX;
-                    y=e.targetTouches[0].pageY;
-                }else{
-                    x=e.changedTouches[0].pageX;
-                    y=e.changedTouches[0].pageY;
-                }
-            }else{
-                x=e.clientX;
-                y=e.clientY;
-            }
-            var ndom = canvas;
-
-            while(ndom.tagName!=="BODY"){
-                x -= ndom.offsetLeft;
-                y -= ndom.offsetTop;
-                ndom = ndom.parentNode;
-            }
-            return {
-                x: x,
-                y: y
-            }
-        }
-
-        //通过修改globalCompositeOperation来达到擦除的效果
-        function tapClip() {
-            var hastouch = "ontouchstart" in window ? true : false,
-                    tapstart = hastouch ? "touchstart" : "mousedown",
-                    tapmove = hastouch ? "touchmove" : "mousemove",
-                    tapend = hastouch ? "touchend" : "mouseup";
-
-            var area;
-            var x2,y2;
-
-            ctx.lineCap = "round";
-            ctx.lineJoin = "round";
-            ctx.lineWidth = a * 2;
-            ctx.globalCompositeOperation="destination-out";
-            //ctx.globalCompositeOperation = "source-out";
-            canvas.removeEventListener(tapstart,tStart);
-            canvas.removeEventListener(tapmove,tapmoveHandler);
-            canvas.removeEventListener(tapend,tapmoveHandler);
-            canvas.addEventListener(tapstart, tStart)
-            function tStart(e){
-                clearTimeout(timeout);
-                e.preventDefault();
-                area = getClipArea(e, hastouch);
-
-                x1 = area.x;
-                y1 = area.y;
-
-                drawLine(x1, y1);
-                canvas.addEventListener(tapmove, tapmoveHandler);
-                canvas.addEventListener(tapend, tapmoveHandler);
-            }
-            function tapmoveHandler(e) {
-                clearTimeout(timeout);
-
-                e.preventDefault();
-
-                area = getClipArea(e, hastouch);
-
-                x2 = area.x;
-                y2 = area.y;
-                drawLine(x1, y1, x2, y2);
-                if(e.type=='touchend'){
-                    var num = 0;
-                    var datas = ctx.getImageData(0,0,canvas.width,canvas.height);
-                    for (var i = 0; i < datas.data.length; i++) {
-                        if (datas.data[i] == 0) {
-                            num++;
-                        }
-                    }
-                    if (num >= datas.data.length * 0.5) {
-                        ctx.fillRect(0,0,canvas.width,canvas.height);
-                        if(imgArry.length>0){
-                            setTimeout(function(){
-                                startGame();
-                            },3000);
-                        }
-
-                    }
-                }
-
-                x1 = x2;
-                y1 = y2;
-            }
-
-        }
-
-        function drawLine(x1, y1, x2, y2,isEnd){
-            ctx.save();
-            if(arguments.length==2){
-                ctx.beginPath();
-//                ctx.arc(x1, y1, a, 0, 2 * Math.PI);
-//                ctx.fill();
-            }else {
-                ctx.moveTo(x1, y1);
-                ctx.lineTo(x2, y2);
-                ctx.stroke();
-                ctx.closePath();
-            }
-            ctx.restore();
-        }
-
+        Game({imgArryName:"esImgs",defaultImg:"es-0.jpg",esImgClass:"es-img"});
     </script>
 </body>
 </html>
