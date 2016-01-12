@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui"/>
+</head>
+<body>
+<canvas id="myCanvas"></canvas>
+<script>
+
+    /* 独行冰海 */
+    var myCanvas = document.getElementById('myCanvas');
+    var gray = myCanvas.getContext('2d');
+    gray.beginPath();
+    gray.fillStyle = "#999";
+    gray.fillRect(0,0,320,400);
+    gray.closePath();
+    gray.globalCompositeOperation="destination-out";
+
+    myCanvas.addEventListener('touchmove', function(e){
+        e.preventDefault();
+        gray.beginPath();
+        gray.fillStyle = "#f00";
+        gray.arc(e.targetTouches[0].clientX, e.targetTouches[0].clientY, 20, 0, Math.PI*2);
+        gray.fill();
+        gray.closePath();
+    });
+
+    myCanvas.addEventListener('touchend', function(e){
+        e.preventDefault();
+        var num = 0;
+        var datas = gray.getImageData(0,0,320,400);
+        for (var i = 0; i < datas.data.length; i++) {
+            if (datas.data[i] == 0) {
+                num++;
+            };
+        };
+        if (num >= datas.data.length * 0.7) {
+            gray.fillRect(0,0,320,400);
+        };
+    });
+</script>
+</body>
+</html>
