@@ -46,16 +46,15 @@ Game.prototype = {
                 var img = new Image();
                 dImg.src = $this.imgPath + $this.imgArry.pop();
                 dImg.classList.add(setting.esImgClass || "es-img");
-                dImg.onload=function(){
+                img.src = $this.imgPath + (setting.defaultImg || "es-0.jpg");
+                img.onload = function () {
+                    img.height = img.height * ($this.canvas.width / img.width);
+                    img.width = $this.canvas.width;
+                    var w = $this.canvas.height * img.width / img.height;
+                    $this.ctx.drawImage(img, ($this.canvas.width - w) / 2, 0, w, $this.canvas.height);
                     document.getElementById(setting.es || "es").appendChild(dImg);
-                    img.src = $this.imgPath + (setting.defaultImg || "es-0.jpg");
-                    img.onload = function () {
-                        img.height = img.height * ($this.canvas.width / img.width);
-                        img.width = $this.canvas.width;
-                        var w = $this.canvas.height * img.width / img.height;
-                        $this.ctx.drawImage(img, ($this.canvas.width - w) / 2, 0, w, $this.canvas.height);
-                        $this.tapClip()
-                    };
+                    $this.tapClip();
+
                 };
             }
         })
