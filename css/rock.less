@@ -1,0 +1,128 @@
+*,*:before,*:after{
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+body,html{
+    height: 100%;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    font: 14px STHeiti,Helvetica Neue,Heiti SC,Microsoft YaHei, Arial, Helvetica, sans-serif;
+}
+h1,h2{
+    margin: 0;
+}
+.m{
+    background: url("../img/m-0.jpg") repeat;
+    background-size: cover;
+    height: 100%;
+    width: 100%;
+}
+.web{
+    background: url("../img/m-0.jpg") repeat;
+    height: 100%;
+    width: 100%;
+    min-width: 1920px;
+}
+.tree,.monkey-pc,.web{
+    min-height: 1080px;
+}
+.tree{
+    height: 100%;
+    position: absolute;
+    right: 400px;
+}
+.monkey-pc{
+    background: url("../img/monkey1.png") no-repeat 0 100%;
+    width: 170px;
+    height: 100%;
+    position: absolute;
+    z-index: 1;
+    right: 440px;
+    &.cur{
+        animation: monkey 15s linear 1;
+        animation-fill-mode:forwards;
+        -webkit-animation: monkey 15s linear 1;
+        -webkit-animation-fill-mode:forwards;
+    }
+}
+.year-text{
+    padding: 310px 0 0 120px;
+}
+.m-tree{
+    position: absolute;
+    background-size: contain;
+    display: block;
+    height: 95%;
+    bottom: 0;
+    z-index: 1;
+}
+.popup-mask{
+    background: rgba(0,0,0,.6);
+    width: 100%;
+    height: 100%;
+    z-index: 9;
+    left: 0;
+    top: 0;
+    position: fixed;
+    display: none;
+    &.show{
+        display: block;
+    }
+}
+.popup{
+    background: #ff5b5b;
+    position: absolute;
+    top: 20%;
+    left: 10%;
+    right: 10%;
+    border-radius: 10px;
+    color: #fff;
+    z-index: 10;
+    padding: 20px;
+    h2{
+        font-size: 24px;
+        margin-bottom: 30px;
+    }
+    h1{
+        font-size: 38px;
+    }
+    &:after{
+        content: "";
+        right: 0;
+        top: -50px;
+        background: url("../img/monkey1.png") no-repeat;
+        background-size: contain;
+        position: absolute;
+        width: 100px;
+        height: 100px;
+    }
+}
+.monkey{
+    background: url("../img/monkey1.png") no-repeat 50% 100%;
+    background-size: 85px 88px;
+    height: 95%;
+    position: absolute;
+    z-index: 2;
+    bottom: 0;
+    width: 100%;
+    &.cur{
+        animation: monkey 15s linear 1;
+        animation-fill-mode:forwards;
+        -webkit-animation: monkey 15s linear 1;
+        -webkit-animation-fill-mode:forwards;
+    }
+}
+.loop(@counter,@n:1) when (@counter > 0) {
+    @{counter}{
+        background-position-y: 100-@counter;
+        background-image: url("../img/monkey@{n}.png");
+    }
+    .loop((@counter - .5),@n*-1);    // 递归调用自身
+}
+@keyframes monkey{
+    .loop(100%);
+}
+@-webkit-keyframes monkey{
+    .loop(100%);
+}
