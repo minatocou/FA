@@ -121,7 +121,7 @@ h1,h2{
         background-position-y: 100-@counter;
         background-image: url("../img/monkey@{n}.png");
     }
-    .loop((@counter - .5),@n*-1);    // 递归调用自身
+    .loop((@counter - 2),@n*-1);    // 递归调用自身
 }
 @keyframes monkey{
     .loop(100%);
