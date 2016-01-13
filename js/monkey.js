@@ -6,11 +6,19 @@
     var x, y, z, last_x=0, last_y=0, last_z=0;
     var use=true;
     var cd=true;
+    var zz=true;
+    //setInterval(function(){
+    //    num++;
+    //    document.getElementById('monkey').style.backgroundPositionY=(100-num)+'%';
+    //    zz=!zz;
+    //    var img=zz?'monkey1.png':'monkey-1.png';
+    //    document.getElementById('monkey').style.backgroundImage='url("img/'+img+'")';
+    //},100);
     function deviceMotionHandler(eventData) {
         if(use){
             if(num>0 && cd){
                 cd=false;
-                document.getElementById('monkey').classList.add('cur');
+                //document.getElementById('monkey').classList.add('cur');
                 var c=setInterval(function(){
                     if(time<=0){
                         use=false;
@@ -36,6 +44,12 @@
                 if (speed > SHAKE_THRESHOLD) {
                     num++;
                     document.getElementById('num').innerHTML=num;
+                    if(num<100){
+                        document.getElementById('monkey').style.backgroundPositionY=(100-num)+'%';
+                        zz=!zz;
+                        var img=zz?'monkey1.png':'monkey-1.png';
+                        document.getElementById('monkey').style.backgroundImage='url("img/'+img+'")';
+                    }
 
                 }
                 last_x = x;
