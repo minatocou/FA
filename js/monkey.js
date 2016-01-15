@@ -1,3 +1,4 @@
+
 (function(){
     var SHAKE_THRESHOLD=800;
     var last_update = 0;
@@ -23,6 +24,7 @@
                     if(time<=0){
                         use=false;
                         document.getElementById('mask').classList.add('show');
+                        success(num);
                         clearInterval(c);
                     }else{
                         time--;
@@ -62,5 +64,11 @@
 
     if (window.DeviceMotionEvent) {
         window.addEventListener('devicemotion',deviceMotionHandler, false);
+    }
+    var success = function(rotation){
+        app.ajax({
+            url:'/send-statistics',
+            data:{user:openid,rotation:rotation}
+        });
     }
 })();

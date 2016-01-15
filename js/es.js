@@ -1,16 +1,5 @@
 "use strict";
-var app = {};
-app.ajax = function (options) {
-    var callback = function (evt) {
-        if ((evt.currentTarget.readyState == 4) && (evt.currentTarget.status == 200 || evt.currentTarget.status == 0)) {
-            options.success(evt.currentTarget.response)
-        }
-    }
-    var request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP");
-    request.onreadystatechange = callback;
-    request.open("GET", options.url);
-    request.send(null);
-};
+
 function Game(setting) {
     return Game.prototype.init(setting);
 }
