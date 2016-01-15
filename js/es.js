@@ -16,7 +16,7 @@ Game.prototype = {
     esImgClass:null,
     defaultImg:null,
     imgPath: "img/",
-    esClear: 0.6,
+    esClear: 0.3,
     init: function (setting) {
         var $this = this;
         app.ajax({
@@ -30,7 +30,7 @@ Game.prototype = {
                 $this.canvas.width = setting.width || document.body.offsetWidth;
                 $this.canvas.height = setting.height || document.body.offsetHeight;
                 $this.imgArry = data[setting.imgArryName||"esImgs"];
-                $this.esClear = data.esClear;
+                $this.esClear = setting.esClear || data.esClear;
                 var dImg = new Image();
                 var img = new Image();
                 dImg.src = $this.imgPath + $this.imgArry.pop();
