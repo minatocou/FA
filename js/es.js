@@ -16,7 +16,7 @@ Game.prototype = {
     esImgClass:null,
     defaultImg:null,
     imgPath: "img/",
-    esClear: 0.8,
+    esClear: 0.6,
     init: function (setting) {
         var $this = this;
         app.ajax({
@@ -98,25 +98,23 @@ Game.prototype = {
                 x2 = area.x;
                 y2 = area.y;
                 $this.drawLine(x1, y1, x2, y2);
-
-                if (e.type == tapend) {
-                    var num = 0;
-                    var datas = ctx.getImageData(0, 0, canvas.width, canvas.height);
-                    for (var i = 0; i < datas.data.length; i++) {
-                        if (datas.data[i] == 0) {
-                            num++;
-                        }
+                var num = 0;
+                var datas = ctx.getImageData(0, 0, canvas.width, canvas.height);
+                for (var i = 0; i < datas.data.length; i++) {
+                    if (datas.data[i] == 0) {
+                        num++;
                     }
-                    if (num >= datas.data.length * $this.esClear) {
-                        ctx.fillRect(0, 0, canvas.width, canvas.height);
-                        if ($this.imgArry.length > 0) {
-                            setTimeout(function () {
-                                startGame();
-                            }, 3000);
-                        }
-                    }
-                }else{
                 }
+
+                if (num >= datas.data.length * $this.esClear) {
+                    ctx.fillRect(0, 0, canvas.width, canvas.height);
+                    if ($this.imgArry.length > 0) {
+                        setTimeout(function () {
+                            startGame();
+                        }, 3000);
+                    }
+                }
+
                 x1 = x2;
                 y1 = y2;
             }
