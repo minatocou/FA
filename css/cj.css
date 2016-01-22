@@ -1,0 +1,120 @@
+html,body{
+    font:20px/28px Microsoft YaHei,Arial,Helvetica,sans-serif;
+    word-wrap: break-word;
+    color: #5c5c5c;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
+body{
+    background: url("../images/bg.png") no-repeat 50% 0;
+    background-size: cover;
+}
+ul, menu, dir {
+    display: block;
+    list-style-type: disc;
+    margin: 0;
+    padding: 0;
+}
+ul {
+    list-style: none;
+}
+input,textarea{outline:none}
+*, *:before, *:after {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box; /* Firefox */
+    -webkit-box-sizing: border-box; /* Safari */
+}
+.msg{
+    color: #66ccff;
+    font-size: 12;
+    margin: 5px;
+}
+.slide{
+    padding-top: 20%;
+}
+.slide-box{
+    width: 320px;
+    display: inline-block;
+    height: 320px;
+    vertical-align: top;
+}
+.u-header{
+    width: 320px;
+    height: 320px;
+    display: block;
+}
+.jg{
+    display: none;
+}
+.jg .u-header{
+    display: inline-block;
+    text-align: center;
+}
+.dib{
+    float: left;
+    margin: 3px;
+    text-align: center;
+}
+.name{
+    font-size: 32px;
+    line-height: 50px;
+}
+.dib .org{
+    width: 128px;
+    max-width: 128px;
+    white-space:nowrap;
+}
+.tada-box{
+    opacity: 0;
+    text-align: left;
+    display: inline-block;
+}
+.tada img{
+    width: 128px;
+    height: 128px;
+    border-radius: 5px;
+}
+.tada{
+    -webkit-animation:tada 1s .5s ease both;
+    -moz-animation:tada 1s .5s ease both;
+    animation:tada 1s .5s ease both;
+}
+.start-btn,.stop-btn{
+    display: none;
+}
+
+@-webkit-keyframes tada{
+    0%{-webkit-transform:scale(1);opacity:0;}
+    10%,20%{-webkit-transform:scale(0.8) rotate(-6deg);opacity:1}
+    30%,50%,70%,90%{-webkit-transform:scale(1.2) rotate(6deg);opacity:1}
+    40%,60%,80%{-webkit-transform:scale(1.2) rotate(-6deg);opacity:1}
+    100%{-webkit-transform:scale(1) rotate(0);opacity:1}
+}
+@-moz-keyframes tada{
+    0%{-moz-transform:scale(1);opacity:0;}
+    10%,20%{-moz-transform:scale(0.8) rotate(-6deg);opacity:1}
+    30%,50%,70%,90%{-moz-transform:scale(1.2) rotate(6deg);opacity:1}
+    40%,60%,80%{-moz-transform:scale(1.2) rotate(-6deg);opacity:1}
+    100%{-moz-transform:scale(1) rotate(0);opacity:1}
+}
+@keyframes tada{
+    0%{transform:scale(1);opacity:0;}
+    10%,20%{transform:scale(0.8) rotate(-6deg);opacity:1}
+    30%,50%,70%,90%{transform:scale(1.2) rotate(6deg);opacity:1}
+    40%,60%,80%{transform:scale(1.2) rotate(-6deg);opacity:1}
+    100%{transform:scale(1) rotate(0);opacity:1}
+}
+/* 纵向滚动参考样式 */
+.cxscroll{position:relative;width:320px;height:450px;background: url("../images/box-bg.png") no-repeat 50% 0; background-size: cover;padding: 20px;margin: 0 1%;}
+.cxscroll.op5{
+    background-image: url("../images/box-bg-op.png");
+}
+.cxscroll .box{overflow:hidden;position:relative;height:320px;border-radius: 5px;}
+.cxscroll .list{position:absolute;top:0;left:0;}
+.cxscroll .list li{height:320px;text-align:center;}
+.cxscroll .prev{top:5px;background-position:-80px 0;}
+.cxscroll .next{bottom:5px;background-position:-130px 0;}
+.cxscroll .prev:hover{background-position:-80px -40px;}
+.cxscroll .next:hover{background-position:-130px -40px;}
